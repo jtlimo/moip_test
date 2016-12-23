@@ -31,7 +31,7 @@ class APIClient
   end
 
   def self.get_client(customer_id)
-    RestClient.get(CLIENT_API_URL + "/#{customer_id}", content_type: :json, accept: :json) do |response, _request, _result|
+    RestClient.get(CLIENT_API_URL + "/#{customer_id}", content_type: :json, accept: :json, Authorization: AUTH) do |response, _request, _result|
       return ResponseClientAPI.new(JSON.parse(response), response.code)
     end
   end
@@ -55,8 +55,8 @@ class APIClient
         }
       }
     }
-    RestClient.post(CLIENT_API_URL, json.to_json, content_type: :json, accept: :json) do |response, _request, _result|
-      return ResponseClientAPI.new(JSON.parse(response))
+    RestClient.post(CLIENT_API_URL + "/#{client.id}/fundinginstruments", json.to_json, content_type: :json, accept: :json, Authorization: AUTH) do |response, _request, _result|
+      return ResponseClientAPI.new(JSON.parse(response), response.code)
     end
   end
 end

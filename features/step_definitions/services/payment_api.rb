@@ -34,7 +34,7 @@ class APIPayment
     end
   end
 
-  def self.get_order(payment_id)
+  def self.get_payment(payment_id)
     RestClient.get(PAYMENT_API_URL + "/#{payment_id}", content_type: :json, accept: :json) do |response, _request, _result|
       return ResponsePaymentAPI.new(JSON.parse(response))
     end

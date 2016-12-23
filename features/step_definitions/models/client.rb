@@ -5,7 +5,7 @@ class Client
   attr_accessor :own_id, :nome_completo, :email, :data_nascimento
   attr_accessor :type_document, :cpf, :country_code, :area_code
   attr_accessor :telefone, :zip_code, :street, :street_number
-  attr_accessor :complement, :district, :city, :state, :country
+  attr_accessor :complement, :district, :city, :state, :country, :id
 
   def initialize(create_type)
     obj = data_for "clients/#{create_type}"
@@ -26,5 +26,6 @@ class Client
     @city = obj['city']
     @state = obj['state']
     @country = obj['country']
+    @id = obj['id']
   end
 end

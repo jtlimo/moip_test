@@ -16,7 +16,8 @@ module Lib
 
   def credit_card(type)
     credit_cards = {
-      'adicionar cartão válido': :accepted_credit_card
+      'adicionar cartão válido': :accepted_credit_card,
+      'cartão a este cliente': :accepted_credit_card
     }.freeze
     generate_credit_card_with (credit_cards[type.downcase.to_sym])
   end

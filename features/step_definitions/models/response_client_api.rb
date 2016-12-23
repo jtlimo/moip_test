@@ -44,6 +44,18 @@ class ResponseClientAPI
     format_data(response_json['createdAt'])
   end
 
+  def credit_card_first_6
+    response_json['creditCard']['first6']
+  end
+
+  def credit_card_last_4
+    response_json['creditCard']['last4']
+  end
+
+  def method
+    response_json['method']
+  end
+
   private
 
   def format_data(data)

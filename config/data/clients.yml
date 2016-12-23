@@ -16,3 +16,4 @@ create_accepted_client:
   city: 'Sao Paulo'
   state: 'SP'
   country: BRA
+  id: nil
