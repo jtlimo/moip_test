@@ -4,8 +4,8 @@ require 'base64'
 
 # API class to create / get clients of Moips and add payment methods to clients
 class APIClient
-  ENCODING = Base64.strict_encode64("#{TOKEN}:#{KEY}")
-  CLIENT_API_URL = "https://#{ENCODING}@#{MOIP_URL}/v2/customers".freeze
+  AUTH = 'Basic ' + Base64.strict_encode64("#{TOKEN}:#{KEY}")
+  CLIENT_API_URL = "https://#{MOIP_URL}/v2/customers".freeze
 
   def self.create_client(client)
     json = {
@@ -25,15 +25,14 @@ class APIClient
         state: client.state, country: client.country
       }
     }
-
-    RestClient.post(CLIENT_API_URL, json.to_json, content_type: :json, accept: :json) do |response, _request, _result|
-      return ResponseClientAPI.new(JSON.parse(response))
+    RestClient.post(CLIENT_API_URL, json.to_json, content_type: :json, accept: :json, Authorization: AUTH) do |response, _request, _result|
+      return ResponseClientAPI.new(JSON.parse(response), response.code)
     end
   end
 
   def self.get_client(customer_id)
     RestClient.get(CLIENT_API_URL + "/#{customer_id}", content_type: :json, accept: :json) do |response, _request, _result|
-      return ResponseClientAPI.new(JSON.parse(response))
+      return ResponseClientAPI.new(JSON.parse(response), response.code)
     end
   end
 

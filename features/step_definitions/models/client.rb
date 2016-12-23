@@ -1,6 +1,7 @@
 # Generate object Client with DataMagic and .yml file
 class Client
   include DataMagic
+
   attr_accessor :own_id, :nome_completo, :email, :data_nascimento
   attr_accessor :type_document, :cpf, :country_code, :area_code
   attr_accessor :telefone, :zip_code, :street, :street_number

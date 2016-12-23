@@ -1,49 +1,47 @@
 # Class to manipulate response of Client API
 class ResponseClientAPI
-  attr_accessor :response_json
+  attr_accessor :response_json, :http_code
 
-  def initialize(json)
+  def initialize(json, http_code)
     self.response_json = json
+    self.http_code = http_code
   end
 
   def id
     response_json['id']
   end
 
-  def errors
-    response_json['errors']
+  def own_id
+    response_json['ownId']
   end
 
-  def nome_campanha
-    response_json['name']
+  def cliente_data
+    {
+      nome_completo: response_json['fullname'],
+      data_nascimento: response_json['birthDate'],
+      email: response_json['email'],
+      telefone: response_json['phone']['number'],
+      area_code: response_json['phone']['areaCode'],
+      country_code: response_json['phone']['countryCode'],
+      type_document: response_json['taxDocument']['type'],
+      cpf: response_json['taxDocument']['number'],
+      zip_code: response_json['shippingAddress']['zipCode'],
+      street: response_json['shippingAddress']['street'],
+      street_number: response_json['shippingAddress']['streetNumber'],
+      complement: response_json['shippingAddress']['complement'],
+      city: response_json['shippingAddress']['city'],
+      district: response_json['shippingAddress']['district'],
+      state: response_json['shippingAddress']['state'],
+      country: response_json['shippingAddress']['country']
+    }
   end
 
-  def status
-    response_json['status']
-  end
-
-  def data_ativacao
-    format_data(response_json['activated_at'])
-  end
-
-  def data_inativacao
-    format_data(response_json['inactivated_at'])
+  def moip_account_id
+    response_json['moipAccount']['id']
   end
 
   def data_criacao
-    format_data(response_json['created_at'])
-  end
-
-  def data_ultimo_update
-    format_data(response_json['updated_at'])
-  end
-
-  def porcentagem
-    response_json['percentage']
-  end
-
-  def campanhas
-    response_json
+    format_data(response_json['createdAt'])
   end
 
   private
