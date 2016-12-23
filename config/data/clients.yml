@@ -1,0 +1,18 @@
+create_accepted_client:
+  own_id: ~generate_id
+  nome_completo: ~full_name
+  email: ~email
+  data_nascimento: ~date_of_birth(rand(16..70))
+  type_document: 'CPF'
+  cpf: 33108511840
+  country_code: 55
+  area_code: 11
+  telefone: ~cell_phone
+  zip_code: 09280710
+  street: 'Avenida Faria Lima'
+  street_number: ~randomize(1..1000)
+  complement: '8'
+  district: 'Itaim'
+  city: 'Sao Paulo'
+  state: 'SP'
+  country: BRA
