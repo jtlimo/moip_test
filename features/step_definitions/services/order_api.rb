@@ -4,8 +4,8 @@ require 'base64'
 
 # API class to create / get and list orders
 class APIOrders
-  ENCODING = Base64.strict_encode64("#{TOKEN}:#{KEY}")
-  ORDER_API_URL = "https://#{ENCODING}@#{MOIP_URL}/v2/orders".freeze
+  AUTH = 'Basic ' + Base64.strict_encode64("#{TOKEN}:#{KEY}")
+  ORDER_API_URL = "https://#{MOIP_URL}/v2/orders".freeze
 
   def self.create_order(client, order_itens)
     json = {
@@ -40,21 +40,21 @@ class APIOrders
         }
       }
     }
-    RestClient.post(ORDER_API_URL, json.to_json, content_type: :json, accept: :json) do |response, _request, _result|
-      return ResponseOrderAPI.new(JSON.parse(response))
+    RestClient.post(ORDER_API_URL, json.to_json, content_type: :json, accept: :json, Authorization: AUTH) do |response, _request, _result|
+      return ResponseOrderAPI.new(JSON.parse(response), response.code)
     end
   end
 
   def self.get_order(order_id)
-    RestClient.get(ORDER_API_URL + "/#{order_id}", content_type: :json, accept: :json) do |response, _request, _result|
-      return ResponseOrderAPI.new(JSON.parse(response))
+    RestClient.get(ORDER_API_URL + "/#{order_id}", content_type: :json, accept: :json, Authorization: AUTH) do |response, _request, _result|
+      return ResponseOrderAPI.new(JSON.parse(response), response.code)
     end
   end
 
   def self.list_orders(query)
     params = { q: query }
-    RestClient.get(CLIENT_API_URL, { params: params }, content_type: :json, accept: :json) do |response, _request, _result|
-      return ResponseOrderAPI.new(JSON.parse(response))
+    RestClient.get(CLIENT_API_URL, { params: params }, content_type: :json, accept: :json, Authorization: AUTH) do |response, _request, _result|
+      return ResponseOrderAPI.new(JSON.parse(response), response.code)
     end
   end
 end

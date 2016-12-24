@@ -2,7 +2,7 @@ create_accepted_client:
   own_id: ~generate_id
   nome_completo: ~full_name
   email: ~email_address
-  data_nascimento: ~date_of_birth(rand(16..70))
+  data_nascimento: ~date_of_birth(rand(21..40))
   type_document: 'CPF'
   cpf: 33108511840
   country_code: 55

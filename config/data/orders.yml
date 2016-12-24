@@ -1,0 +1,9 @@
+accepted_order:
+  own_id: ~generate_id
+  currency: 'BRL'
+  shipping: 1000
+  product: 'Descrição produto'
+  quantity: 1
+  detail: 'Mais info'
+  price: 1000
+  id: nil
