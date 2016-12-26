@@ -7,7 +7,6 @@ group :test do
   gem 'cucumber'
   gem 'data_magic'
   gem 'json'
-  gem 'poltergeist'
   gem 'pry-byebug'
   gem 'rest-client'
   gem 'rspec'

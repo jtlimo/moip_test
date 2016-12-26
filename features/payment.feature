@@ -8,13 +8,11 @@ Contexto:
   E adicionar um cartão a este cliente
   E que exista um pedido válido realizado
 
-@test
 Cenário: Realizar pagamento do pedido via API
   Quando fazer a chamada para realização do pagamento
   Então o pagamento será realizado
 
 Cenário: Consultar pagamento realizado via API
-  Dado que o cliente realize um pagamento válido
-  E fazer a chamada para criação do pagamento
+  Dado fazer a chamada para realização do pagamento
   Quando consultar o pagamento realizado
   Então o pagamento é consultado com sucesso

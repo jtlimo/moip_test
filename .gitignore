@@ -1,0 +1,2 @@
+#Ignore .png files generated in cucumber tests
+*.png

@@ -39,7 +39,6 @@ module Commons
     expect(@response.http_code).to be_between(200, 201).inclusive
     expect(@response.data_criacao).to eq Date.today.strftime('%d-%m-%Y')
     validar_cliente_values
-    validar_order_values
     validar_payment_values
   end
 
@@ -68,7 +67,14 @@ module Commons
   end
 
   def validar_payment_values
-    p 1
+    hash = obj_to_hash(@order)
+    expect(@response.order_data[:total]).to eq hash[:shipping] + hash[:price]
+    expect(@response.order_data[:parcelas]).to eq 1
+    expect(@response.order_data[:currency]).to eq hash[:currency]
+    expect(@response.credit_card_data[:first_6])
+      .to eq @credit_card.number.to_s.chars.first(6).join
+    expect(@response.credit_card_data[:last_4])
+      .to eq @credit_card.number.to_s.chars.last(4).join
   end
 
   def associar_cartao_ao_cliente

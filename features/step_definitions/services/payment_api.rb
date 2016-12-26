@@ -33,9 +33,6 @@ class APIPayment
         }
       }
     RestClient.post(ORDER_API_URL + "/#{order_id}/payments", json.to_json, content_type: :json, accept: :json, Authorization: AUTH) do |response, _request, _result|
-      p response
-      puts json.to_json
-      p ORDER_API_URL + "/#{order_id}/payments"
       return ResponsePaymentAPI.new(JSON.parse(response), response.code)
     end
   end
